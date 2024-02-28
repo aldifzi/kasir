@@ -17,14 +17,33 @@ use yii\helpers\Url;
 use devanych\cart\CartItem;
 use devanych\cart\Cart;
 
-
+$pelanggan = Yii::$app->request->get('PelangganID');
+$nota = Yii::$app->request->get('Nota');
 
 /** @var yii\web\View $this */
 /** @var app\models\Detailpenjualan $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<?php $form = ActiveForm::begin(); ?>
+<div class="detailpenjualan-form">
+
+    <?php $form = ActiveForm::begin(); ?>
+
+    
+
+    <?php echo $form->field($model, 'PelangganID')->widget(Select2::classname(), [
+        'name' => 'pelanggan',
+        'id' => 'plgn-id',
+        'data' => ArrayHelper::map(Pelanggan::find()->asArray()->all(), "PelangganID", "NamaPelanggan"),
+        'language' => 'id',
+        'options' => ['placeholder' => 'PIlih Pelanggan ...', 'value'=> $pelanggan],
+        'pluginOptions' => [
+            'allowClear' => true,
+            /* 'disabled' => true */
+        ],
+    ]); ?>
+
+    <?= $form->field($model, 'Nota')->textInput(['value'=>$nota,'readOnly' => true]) ?>
 
     <?= $form->field($model, 'ProdukID')->widget(Select2::classname(), [
         'name' => 'pelanggan',
@@ -37,28 +56,30 @@ use devanych\cart\Cart;
         ],
     ]); ?>
 
+
+
+    <?= $form->field($model, 'JumlahProduk')->textInput() ?>
+
     <div class="form-group">
-        <?= Html::a('<button style="background-color: aqua; padding: 10px;"></button>', ['add-to-cart', 'id' => $model->ProdukID]);?>
+        <?= Html::a('Simpan', ['simpan'], ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Update', ['class' => 'btn btn-success']) ?>
     </div>
-    <table class="table" id="tabel-barang">
-        <thead>
-            <tr>
-                <th>Nama Barang</th>
-                <th style="">Jumlah</th>
-                <th>Harga</th>
-                <th>Subtotal</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Baris-baris akan ditambahkan secara dinamis di sini -->
-        </tbody>
-        <tfoot>
-            <tr>
-                <th colspan="3">Total</th>
-                <th id="total">0</th>
-                <th></th>
-            </tr>
-        </tfoot>
-    </table>
+
     <?php ActiveForm::end(); ?>
+
+   
+   <!-- <table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>b</th>
+            <th>h</th>
+            <th>h</th>
+        </tr>
+    </thead>
+    <tbody>
+   
+    </tbody>
+   </table> -->
+   
+
+</div>

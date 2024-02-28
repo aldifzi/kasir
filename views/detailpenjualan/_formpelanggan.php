@@ -42,7 +42,7 @@ use devanych\cart\Cart;
     <?= $form->field($model, 'Nota')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::a('Simpan',['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Simpan',['create', 'class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -28,21 +28,17 @@ class CartController extends Controller
         ]);
     }
 
-    public function actionAdd($id, $jumlahproduk = 1)
+    public function actionAdd($product, $qty)
     {
-        try {
-            $product = $this->getProduct($id);
-            $jumlahproduk = $this->getQuantity($jumlahproduk, $product->jumlahproduk);
-            if ($item = $this->cart->getItem($product->id)) {
-                $this->cart->plus($item->getId(), $jumlahproduk);
-            } else {
-                $this->cart->add($product, $jumlahproduk);
-            }
-        } catch (\DomainException $e) {
-            Yii::$app->errorHandler->logException($e);
-            Yii::$app->session->setFlash('error', $e->getMessage());
-        }
-        return $this->redirect(['index']);
+        $cart = \Yii::$app->cart;
+        $qty = Yii::$app->request->post('inputFieldName');
+        $product = Yii::$app->request->post('produk');
+
+        // Add the specified product to the cart
+        $cart->add($product, $qty); // Replace 'Product Name' and 10.00 with actual data
+
+        // Redirect to the cart page
+        return $this->redirect(['cart/index']);
     }
 
     public function actionChange($id, $qty = 1)

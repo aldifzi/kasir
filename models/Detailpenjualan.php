@@ -4,17 +4,15 @@ namespace app\models;
 
 use Yii;
 
-use ItemTrait;
-
 /**
  * This is the model class for table "detailpenjualan".
  *
  * @property int $DetailID
- * @property int $ProdukID
+ * @property int|null $ProdukID
  * @property int $PelangganID
  * @property int $Nota
- * @property int $JumlahProduk
- * @property float $Subtotal
+ * @property int|null $JumlahProduk
+ * @property float|null $Subtotal
  *
  * @property Pelanggan $pelanggan
  * @property Produk $produk
@@ -35,24 +33,12 @@ class Detailpenjualan extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['PelangganID', 'Nota'], 'required'],
             [['ProdukID', 'PelangganID', 'Nota', 'JumlahProduk'], 'integer'],
+            [['PelangganID', 'Nota'], 'required'],
             [['Subtotal'], 'number'],
             [['ProdukID'], 'exist', 'skipOnError' => true, 'targetClass' => Produk::class, 'targetAttribute' => ['ProdukID' => 'ProdukID']],
             [['PelangganID'], 'exist', 'skipOnError' => true, 'targetClass' => Pelanggan::class, 'targetAttribute' => ['PelangganID' => 'PelangganID']],
         ];
-    }
-
-    
-
-    public function getPrice()
-    {
-        return $this->harga;
-    }
-
-    public function getId()
-    {
-        return $this->ProdukID;
     }
 
     /**
@@ -78,6 +64,11 @@ class Detailpenjualan extends \yii\db\ActiveRecord
     public function getPelanggan()
     {
         return $this->hasMany(Pelanggan::class, ['PelangganID' => 'PelangganID']);
+    }
+
+    public function getPelanggan1()
+    {
+        return $this->hasOne(Pelanggan::class, ['PelangganID' => 'PelangganID']);
     }
 
     /**

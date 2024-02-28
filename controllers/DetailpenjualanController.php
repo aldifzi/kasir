@@ -90,16 +90,70 @@ class DetailpenjualanController extends Controller
             $model->loadDefaultValues();
         }
 
-        return $this->render('pelanggan', [
+        return $this->render('create', [
             'model' => $model,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
-    
+    public function actionTambah()
+    {
+        $model = new Detailpenjualan();
+        $searchModel = new ProdukSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
 
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['tambah2', 'PelangganID' => $model->PelangganID, 'Nota' => $model->Nota ]);
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->render('tambah', [
+            'model' => $model,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionTambah2()
+    {
+        $model = new Detailpenjualan();
+        $searchModel = new ProdukSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['update', 'DetailID' => $model->DetailID]);
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->render('tambah', [
+            'model' => $model,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionSimpan()
+    {
+        $model = new Detailpenjualan();
+        $searchModel = new ProdukSearch();
+        if ($model->save()) {
+            // Data saved successfully
+            Yii::$app->session->setFlash('success', 'Data saved successfully.');
+        } else {
+            // Data failed to save
+            Yii::$app->session->setFlash('error', 'Failed to save data.');
+        }
     
+        return $this->redirect(['index']);
+        
+    }
 
     /**
      * Updates an existing Detailpenjualan model.
@@ -110,10 +164,12 @@ class DetailpenjualanController extends Controller
      */
     public function actionUpdate($DetailID)
     {
+        
+        
         $model = $this->findModel($DetailID);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['update', 'DetailID' => $model->DetailID]);
+            return $this->redirect(['tambah', 'PelangganID' => $model->PelangganID, 'Nota' => $model->Nota]);
         }
 
         return $this->render('update', [

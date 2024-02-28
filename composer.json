@@ -30,7 +30,7 @@
         "omnilight/yii2-shopping-cart": "*",
         "mootensai/yii2-enhanced-gii": "dev-master",
         "kartik-v/yii2-mpdf": "dev-master",
-        "kartik-v/yii2-export": "@dev"
+        "kartik-v/yii2-export": "@dev",
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

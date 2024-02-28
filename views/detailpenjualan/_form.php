@@ -17,7 +17,7 @@ use yii\helpers\Url;
 use devanych\cart\CartItem;
 use devanych\cart\Cart;
 
-$cart = \Yii::$app->cart;
+
 
 /** @var yii\web\View $this */
 /** @var app\models\Detailpenjualan $model */
@@ -37,12 +37,12 @@ $cart = \Yii::$app->cart;
         'language' => 'id',
         'options' => ['placeholder' => 'PIlih Pelanggan ...'],
         'pluginOptions' => [
-            'allowClear' => true
-            
+            'allowClear' => true,
+            'disabled' => true
         ],
     ]); ?>
 
-    <?= $form->field($model, 'Nota')->textInput() ?>
+    <?= $form->field($model, 'Nota')->textInput(['readOnly' => true]) ?>
 
     <?= $form->field($model, 'ProdukID')->widget(Select2::classname(), [
         'name' => 'pelanggan',
@@ -60,10 +60,25 @@ $cart = \Yii::$app->cart;
     <?= $form->field($model, 'JumlahProduk')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::a('Update', ['subtotal'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Update', ['update'], ['class' => 'btn btn-success']) ?>
         <?= Html::submitButton('Simpan', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
+
+   
+   <!-- <table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>b</th>
+            <th>h</th>
+            <th>h</th>
+        </tr>
+    </thead>
+    <tbody>
+   
+    </tbody>
+   </table> -->
+   
 
 </div>
