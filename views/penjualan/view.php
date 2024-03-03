@@ -32,9 +32,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'PenjualanID',
             'PelangganID',
             'TanggalPenjualan',
-            'TotalHarga',
-            'Bayar',
-            'Kembali',
+            [
+                'attribute' => 'TotalHarga',
+                'value' => 'Rp ' . number_format($model->TotalHarga, 0, ',', '.'),
+            ],
+            [
+                'attribute' => 'Bayar',
+                'value' => 'Rp ' . number_format($model->Bayar, 0, ',', '.'),
+            ],
+            [
+                'attribute' => 'Kembali',
+                'value' => 'Rp ' . number_format($model->Kembali, 0, ',', '.'),
+            ],
             'Nota',
         ],
     ]) ?>

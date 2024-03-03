@@ -116,6 +116,13 @@ class PenjualanController extends Controller
         return $this->redirect(['index']);
     }
 
+    // Fungsi untuk mengonversi angka desimal ke format mata uang Rupiah
+    function formatRupiah($angka)
+    {
+        $rupiah = "Rp " . number_format($angka, 0, ',', '.');
+        return $rupiah;
+    }
+
     /**
      * Finds the Penjualan model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
