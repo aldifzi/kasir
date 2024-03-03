@@ -55,7 +55,7 @@ use devanych\cart\Cart;
         ],
     ]); ?>
 
-
+<input type="text" value="" class="form-control" disabled>
 
     <?= $form->field($model, 'JumlahProduk')->textInput() ?>
 

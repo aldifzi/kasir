@@ -25,8 +25,8 @@ class DetailpenjualanController extends Controller
     /**
      * @inheritDoc
      */
-    
-     
+
+
     public function behaviors()
     {
         return array_merge(
@@ -76,15 +76,15 @@ class DetailpenjualanController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionAddplgn()
     {
-        $model = new Detailpenjualan();
+        $model = new Penjualan();
         $searchModel = new ProdukSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['update', 'DetailID' => $model->DetailID]);
+                return $this->redirect(['tambah',  'PelangganID' => $model->PelangganID, 'Nota' => $model->Nota, 'PenjualanID' => $model->PenjualanID]);
             }
         } else {
             $model->loadDefaultValues();
@@ -97,15 +97,19 @@ class DetailpenjualanController extends Controller
         ]);
     }
 
+   
+
+
     public function actionTambah()
     {
         $model = new Detailpenjualan();
-        $searchModel = new ProdukSearch();
+        $searchModel = new DetailpenjualanSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
+        
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['tambah2', 'PelangganID' => $model->PelangganID, 'Nota' => $model->Nota ]);
+                return $this->redirect(['tambah', 'PelangganID' => $model->PelangganID, 'Nota' => $model->Nota, 'PenjualanID' => $model->PenjualanID]);
             }
         } else {
             $model->loadDefaultValues();
@@ -118,26 +122,7 @@ class DetailpenjualanController extends Controller
         ]);
     }
 
-    public function actionTambah2()
-    {
-        $model = new Detailpenjualan();
-        $searchModel = new ProdukSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['update', 'DetailID' => $model->DetailID]);
-            }
-        } else {
-            $model->loadDefaultValues();
-        }
-
-        return $this->render('tambah', [
-            'model' => $model,
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
+  
 
     public function actionSimpan()
     {
@@ -150,9 +135,8 @@ class DetailpenjualanController extends Controller
             // Data failed to save
             Yii::$app->session->setFlash('error', 'Failed to save data.');
         }
-    
-        return $this->redirect(['index']);
-        
+
+        return $this->redirect(['penjualan/update', 'PenjualanID' => '36']);
     }
 
     /**
@@ -164,8 +148,8 @@ class DetailpenjualanController extends Controller
      */
     public function actionUpdate($DetailID)
     {
-        
-        
+
+
         $model = $this->findModel($DetailID);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -191,12 +175,7 @@ class DetailpenjualanController extends Controller
         return $this->redirect(['index']);
     }
 
-    public function actionSubtotal($formjumlah, $formharga) {
-        $subtotal = $formjumlah * $formharga;
-        return $subtotal;
-    }
 
-   
 
     /* public function actionAddToCart($id)
     {
@@ -256,7 +235,7 @@ class DetailpenjualanController extends Controller
         endforeach;
         throw new NotFoundHttpException();
     } */
-    
+
 
 
 

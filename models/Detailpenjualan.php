@@ -33,7 +33,7 @@ class Detailpenjualan extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ProdukID', 'PelangganID', 'Nota', 'JumlahProduk'], 'integer'],
+            [['ProdukID', 'PelangganID', 'PenjualanID', 'Nota', 'JumlahProduk'], 'integer'],
             [['PelangganID', 'Nota'], 'required'],
             [['Subtotal'], 'number'],
             [['ProdukID'], 'exist', 'skipOnError' => true, 'targetClass' => Produk::class, 'targetAttribute' => ['ProdukID' => 'ProdukID']],
@@ -50,6 +50,7 @@ class Detailpenjualan extends \yii\db\ActiveRecord
             'DetailID' => 'Detail ID',
             'ProdukID' => 'Produk ID',
             'PelangganID' => 'Pelanggan ID',
+            'PenjualanID' => 'PenjualanID',
             'Nota' => 'Nota',
             'JumlahProduk' => 'Jumlah Produk',
             'Subtotal' => 'Subtotal',

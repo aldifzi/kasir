@@ -2,16 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\Penjualan;
-use app\models\PenjualanSearch;
+use app\models\Kategori;
+use app\models\KategoriSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PenjualanController implements the CRUD actions for Penjualan model.
+ * KategoriController implements the CRUD actions for Kategori model.
  */
-class PenjualanController extends Controller
+class KategoriController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class PenjualanController extends Controller
     }
 
     /**
-     * Lists all Penjualan models.
+     * Lists all Kategori models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new PenjualanSearch();
+        $searchModel = new KategoriSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,30 +48,30 @@ class PenjualanController extends Controller
     }
 
     /**
-     * Displays a single Penjualan model.
-     * @param int $PenjualanID Penjualan ID
+     * Displays a single Kategori model.
+     * @param int $KategoriID Kategori ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($PenjualanID)
+    public function actionView($KategoriID)
     {
         return $this->render('view', [
-            'model' => $this->findModel($PenjualanID),
+            'model' => $this->findModel($KategoriID),
         ]);
     }
 
     /**
-     * Creates a new Penjualan model.
+     * Creates a new Kategori model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Penjualan();
+        $model = new Kategori();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'PenjualanID' => $model->PenjualanID]);
+                return $this->redirect(['view', 'KategoriID' => $model->KategoriID]);
             }
         } else {
             $model->loadDefaultValues();
@@ -83,18 +83,18 @@ class PenjualanController extends Controller
     }
 
     /**
-     * Updates an existing Penjualan model.
+     * Updates an existing Kategori model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $PenjualanID Penjualan ID
+     * @param int $KategoriID Kategori ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($PenjualanID)
+    public function actionUpdate($KategoriID)
     {
-        $model = $this->findModel($PenjualanID);
+        $model = $this->findModel($KategoriID);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'PenjualanID' => $model->PenjualanID]);
+            return $this->redirect(['view', 'KategoriID' => $model->KategoriID]);
         }
 
         return $this->render('update', [
@@ -103,29 +103,29 @@ class PenjualanController extends Controller
     }
 
     /**
-     * Deletes an existing Penjualan model.
+     * Deletes an existing Kategori model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $PenjualanID Penjualan ID
+     * @param int $KategoriID Kategori ID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($PenjualanID)
+    public function actionDelete($KategoriID)
     {
-        $this->findModel($PenjualanID)->delete();
+        $this->findModel($KategoriID)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Penjualan model based on its primary key value.
+     * Finds the Kategori model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $PenjualanID Penjualan ID
-     * @return Penjualan the loaded model
+     * @param int $KategoriID Kategori ID
+     * @return Kategori the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($PenjualanID)
+    protected function findModel($KategoriID)
     {
-        if (($model = Penjualan::findOne(['PenjualanID' => $PenjualanID])) !== null) {
+        if (($model = Kategori::findOne(['KategoriID' => $KategoriID])) !== null) {
             return $model;
         }
 

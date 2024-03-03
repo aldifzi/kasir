@@ -19,6 +19,16 @@ use devanych\cart\Cart;
 
 $pelanggan = Yii::$app->request->get('PelangganID');
 $nota = Yii::$app->request->get('Nota');
+$penjualan = Yii::$app->request->get('PenjualanID');
+$query = $dataProvider->query;
+$query->andFilterWhere(['Nota' => $nota]);
+$script = <<< JS
+$(document).ready(function() {
+    $('#model-PelangganID').select2('readonly', true);
+});
+JS;
+
+$this->registerJs($script);
 
 /** @var yii\web\View $this */
 /** @var app\models\Detailpenjualan $model */
@@ -29,21 +39,23 @@ $nota = Yii::$app->request->get('Nota');
 
     <?php $form = ActiveForm::begin(); ?>
 
-    
+
 
     <?php echo $form->field($model, 'PelangganID')->widget(Select2::classname(), [
         'name' => 'pelanggan',
         'id' => 'plgn-id',
         'data' => ArrayHelper::map(Pelanggan::find()->asArray()->all(), "PelangganID", "NamaPelanggan"),
         'language' => 'id',
-        'options' => ['placeholder' => 'PIlih Pelanggan ...', 'value'=> $pelanggan],
+        'options' => ['placeholder' => 'PIlih Pelanggan ...', 'value' => $pelanggan],
         'pluginOptions' => [
             'allowClear' => true,
             /* 'disabled' => true */
         ],
     ]); ?>
 
-    <?= $form->field($model, 'Nota')->textInput(['value'=>$nota,'readOnly' => true]) ?>
+    <?= $form->field($model, 'Nota')->textInput(['value' => $nota, 'readOnly' => true]) ?>
+
+    <?= $form->field($model, 'PenjualanID')->textInput(['value' => $penjualan, 'readOnly' => true]) ?>
 
     <?= $form->field($model, 'ProdukID')->widget(Select2::classname(), [
         'name' => 'pelanggan',
@@ -61,25 +73,29 @@ $nota = Yii::$app->request->get('Nota');
     <?= $form->field($model, 'JumlahProduk')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::a('Simpan', ['simpan'], ['class' => 'btn btn-success']) ?>
         <?= Html::submitButton('Update', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
 
-   
-   <!-- <table class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th>b</th>
-            <th>h</th>
-            <th>h</th>
-        </tr>
-    </thead>
-    <tbody>
-   
-    </tbody>
-   </table> -->
-   
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            'DetailID',
+            'produk.namabarang',
+            'produk.harga',
+            'JumlahProduk',
+            'Subtotal',
+            [
+                'class' => ActionColumn::className(),
+                'urlCreator' => function ($action, Detailpenjualan $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'DetailID' => $model->DetailID]);
+                }
+            ],
+        ],
+    ]); ?>
+<?= Html::a('Bayar', ['simpan'], ['class' => 'btn btn-success']) ?>
 
 </div>

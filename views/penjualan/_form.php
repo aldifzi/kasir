@@ -1,12 +1,7 @@
 <?php
 
-use app\models\Detailpenjualan;
-use app\models\Pelanggan;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\jui\DatePicker;
-use app\models\Penjualan;
-use app\models\Produk;
 use yii\helpers\ArrayHelper;
 use kartik\select2\Select2;
 use yii\bootstrap\Button;
@@ -14,34 +9,41 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use yii\helpers\Url;
-use kartik\datecontrol\DateControl;
-
+use app\models\Pelanggan;
 
 /** @var yii\web\View $this */
-/** @var app\models\Detailpenjualan $model */
+/** @var app\models\Penjualan $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="pelanggan-form">
+<div class="penjualan-form">
 
     <?php $form = ActiveForm::begin(); ?>
+
+    
 
     <?php echo $form->field($model, 'PelangganID')->widget(Select2::classname(), [
         'name' => 'pelanggan',
         'id' => 'plgn-id',
         'data' => ArrayHelper::map(Pelanggan::find()->asArray()->all(), "PelangganID", "NamaPelanggan"),
         'language' => 'id',
-        'options' => ['placeholder' => 'PIlih Pelanggan ...'],
+        'options' => ['placeholder' => 'PIlih Pelanggan ...', ],
         'pluginOptions' => [
-            'allowClear' => true
+            'allowClear' => true,
+            /* 'disabled' => true */
         ],
     ]); ?>
 
+    <?= $form->field($model, 'TanggalPenjualan')->textInput() ?>
+
+    <?= $form->field($model, 'TotalHarga')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'Bayar')->textInput() ?>
+
     <?= $form->field($model, 'Nota')->textInput() ?>
 
-    <?= $form->field($model, 'TanggalPenjualan')->widget(DateControl::classname()); ?>
     <div class="form-group">
-        <?= Html::submitButton('Simpan',['create', 'class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

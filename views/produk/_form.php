@@ -20,7 +20,7 @@ use kartik\select2\Select2;
     <?= $form->field($model, 'KategoriID')->widget(Select2::classname(), [
         'name' => 'pelanggan',
         'id' => 'produk-id',
-        'data' => ArrayHelper::map(Kategori::find()->asArray()->all(), "KategoriID", "Nama kategori"),
+        'data' => ArrayHelper::map(Kategori::find()->asArray()->all(), "KategoriID", "Namakategori"),
         'language' => 'id',
         'options' => ['placeholder' => 'Pilih Kategori ...'],
         'pluginOptions' => [

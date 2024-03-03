@@ -70,7 +70,7 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                                 [
                                     "items" => [
                                         ["label" => "Home", "url" => "/", "icon" => "home"],
-                                        ["label" => "Transaksi", "url" => ["/detailpenjualan/create"], "icon" => "files-o"],
+                                        ["label" => "Transaksi", "url" => ["/detailpenjualan/addplgn"], "icon" => "files-o"],
                                         ["label" => "User", "url" => [$baseUrl."/user/admin"], "icon" => "files-o"],
                                         [
                                             "label" => "Produk",
@@ -79,6 +79,7 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                                             "items" => [
                                                 ["label" => "Produk", "url" =>  [$baseUrl . "/produk/index"]],
                                                 ["label" => "Tambah Produk", "url" => [$baseUrl . "/produk/create"]],
+                                                ["label" => "Kategori", "url" => [$baseUrl . "/kategori/index"]],
                                             ],
                                         ],
                                         [

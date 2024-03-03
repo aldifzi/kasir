@@ -8,9 +8,10 @@ use Yii;
  * This is the model class for table "penjualan".
  *
  * @property int $PenjualanID
- * @property int $DetailID
+ * @property int $PelangganID
  * @property string $TanggalPenjualan
- * @property float $TotalHarga
+ * @property float|null $TotalHarga
+ * @property float $Bayar
  * @property int $Nota
  */
 class Penjualan extends \yii\db\ActiveRecord
@@ -29,11 +30,10 @@ class Penjualan extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['DetailID', 'TanggalPenjualan', 'TotalHarga', 'Nota'], 'required'],
-            [['DetailID', 'Nota'], 'integer'],
-            [['TotalHarga'], 'number'],
-            [['TanggalPenjualan'], 'date'],
-            [['DetailID'], 'unique'],
+            [['PelangganID', 'TanggalPenjualan', 'Nota'], 'required'],
+            [['PelangganID', 'Nota'], 'integer'],
+            [['TanggalPenjualan'], 'safe'],
+            [['TotalHarga', 'Bayar', 'Kembali'], 'number'],
         ];
     }
 
@@ -44,15 +44,12 @@ class Penjualan extends \yii\db\ActiveRecord
     {
         return [
             'PenjualanID' => 'Penjualan ID',
-            'DetailID' => 'Detail ID',
+            'PelangganID' => 'Pelanggan ID',
             'TanggalPenjualan' => 'Tanggal Penjualan',
             'TotalHarga' => 'Total Harga',
+            'Bayar' => 'Bayar',
+            'Kembali' => 'Kembali',
             'Nota' => 'Nota',
         ];
-    }
-
-    public function getPelanggan()
-    {
-        return $this->hasMany(Pelanggan::class, ['PenjualanID' => 'PenjualanID']);
     }
 }

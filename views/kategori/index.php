@@ -1,24 +1,24 @@
 <?php
 
-use app\models\Penjualan;
+use app\models\Kategori;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /** @var yii\web\View $this */
-/** @var app\models\PenjualanSearch $searchModel */
+/** @var app\models\KategoriSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Penjualans';
+$this->title = 'Kategoris';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="penjualan-index">
+<div class="kategori-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Penjualan', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Kategori', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -30,16 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'PenjualanID',
-            'PelangganID',
-            'TanggalPenjualan',
-            'TotalHarga',
-            'Bayar',
-            //'Nota',
+            'KategoriID',
+            'Namakategori',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Penjualan $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'PenjualanID' => $model->PenjualanID]);
+                'urlCreator' => function ($action, Kategori $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'KategoriID' => $model->KategoriID]);
                  }
             ],
         ],
