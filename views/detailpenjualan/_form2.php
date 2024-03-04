@@ -88,14 +88,9 @@ $this->registerJs($script);
             'produk.harga',
             'JumlahProduk',
             'Subtotal',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Detailpenjualan $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'DetailID' => $model->DetailID]);
-                }
-            ],
+            
         ],
     ]); ?>
-<?= Html::a('Bayar', ['simpan'], ['class' => 'btn btn-success']) ?>
+<?= Html::a('Bayar', ['simpan'], ['class' => 'btn btn-primary']) ?>
 
 </div>
